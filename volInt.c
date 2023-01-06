@@ -1,6 +1,8 @@
 
 /* Update 2023-01-06 by Brian T. Carcich, Latchmoor Services, INC.
  *
+ * Build:  gcc volInt.c -o volInt -lm
+ *
  * Updated URL for Brian Mirtich:
  *
  *   https://people.eecs.berkeley.edu/~jfc/mirtich/
