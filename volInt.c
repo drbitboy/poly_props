@@ -1,42 +1,57 @@
 
+/* Update 2023-01-06 by Brian T. Carcich, Latchmoor Services, INC.
+ *
+ * Updated URL for Brian Mirtich:
+ *
+ *   https://people.eecs.berkeley.edu/~jfc/mirtich/
+ *
+ * Updated URL for this app:
+ *
+ *   https://people.eecs.berkeley.edu/~jfc/mirtich/massProps.html
+ *
+ */
 
-	/*******************************************************
+        /*******************************************************
         *                                                      *
-	*  volInt.c                                            *
-	*                                                      *
-	*  This code computes volume integrals needed for      *
-	*  determining mass properties of polyhedral bodies.   *
-	*                                                      *
-	*  For more information, see the accompanying README   *
-	*  file, and the paper                                 *
-	*                                                      *
-	*  Brian Mirtich, "Fast and Accurate Computation of    *
-	*  Polyhedral Mass Properties," journal of graphics    *
-	*  tools, volume 1, number 1, 1996.                    *
-	*                                                      *
-	*  This source code is public domain, and may be used  *
-	*  in any way, shape or form, free of charge.          *
-	*                                                      *
-	*  Copyright 1995 by Brian Mirtich                     *
-	*                                                      *
-	*  mirtich@cs.berkeley.edu                             *
-	*  http://www.cs.berkeley.edu/~mirtich                 *
+        *  volInt.c                                            *
         *                                                      *
-	*******************************************************/
+        *  This code computes volume integrals needed for      *
+        *  determining mass properties of polyhedral bodies.   *
+        *                                                      *
+        *  For more information, see the accompanying README   *
+        *  file, and the paper                                 *
+        *                                                      *
+        *  Brian Mirtich, "Fast and Accurate Computation of    *
+        *  Polyhedral Mass Properties," journal of graphics    *
+        *  tools, volume 1, number 1, 1996.                    *
+        *                                                      *
+        *  This source code is public domain, and may be used  *
+        *  in any way, shape or form, free of charge.          *
+        *                                                      *
+        *  Copyright 1995 by Brian Mirtich                     *
+        *                                                      *
+        *  mirtich@cs.berkeley.edu                             *
+        *  http://www.cs.berkeley.edu/~mirtich                 *
+        *                                                      *
+        *******************************************************/
 
 /*
-	Revision history
+        Revision history
 
-	26 Jan 1996	Program creation.
+        26 Jan 1996     Program creation.
 
-	 3 Aug 1996	Corrected bug arising when polyhedron density
-			is not 1.0.  Changes confined to function main().
-			Thanks to Zoran Popovic for catching this one.
+         3 Aug 1996     Corrected bug arising when polyhedron density
+                        is not 1.0.  Changes confined to function main().
+                        Thanks to Zoran Popovic for catching this one.
 
-	27 May 1997     Corrected sign error in translation of inertia
-	                product terms to center of mass frame.  Changes 
-			confined to function main().  Thanks to 
-			Chris Hecker.
+        27 May 1997     Corrected sign error in translation of inertia
+                        product terms to center of mass frame.  Changes
+                        confined to function main().  Thanks to
+                        Chris Hecker.
+
+        06 Jan 2023     Updated URLs, replace tabs with spaces, remove
+                        trailing whitespace, move to Github,
+                        by B.T. Carcich
 */
 
 
@@ -234,7 +249,7 @@ void readPolyhedron(char *name, POLYHEDRON *p)
     printf("i/o error\n");
     exit(1);
   }
-  
+
   fscanf(fp, "%d", &p->numVerts);
   printf("Reading in %d vertices\n", p->numVerts);
 
@@ -322,7 +337,7 @@ void compProjectionIntegrals(FACE *f)
     db = b1 - b0;
     a0_2 = a0 * a0; a0_3 = a0_2 * a0; a0_4 = a0_3 * a0;
     b0_2 = b0 * b0; b0_3 = b0_2 * b0; b0_4 = b0_3 * b0;
-    a1_2 = a1 * a1; a1_3 = a1_2 * a1; 
+    a1_2 = a1 * a1; a1_3 = a1_2 * a1;
     b1_2 = b1 * b1; b1_3 = b1_2 * b1;
 
     C1 = a1 + a0;
@@ -380,7 +395,7 @@ compFaceIntegrals(FACE *f)
 
   Faaa = k1 * Paaa;
   Fbbb = k1 * Pbbb;
-  Fccc = -k4 * (CUBE(n[A])*Paaa + 3*SQR(n[A])*n[B]*Paab 
+  Fccc = -k4 * (CUBE(n[A])*Paaa + 3*SQR(n[A])*n[B]*Paab
          + 3*n[A]*SQR(n[B])*Pabb + CUBE(n[B])*Pbbb
          + 3*w*(SQR(n[A])*Paa + 2*n[A]*n[B]*Pab + SQR(n[B])*Pbb)
          + w*w*(3*(n[A]*Pa + n[B]*Pb) + w*P1));
@@ -397,8 +412,8 @@ void compVolumeIntegrals(POLYHEDRON *p)
   double nx, ny, nz;
   int i;
 
-  T0 = T1[X] = T1[Y] = T1[Z] 
-     = T2[X] = T2[Y] = T2[Z] 
+  T0 = T1[X] = T1[Y] = T1[Z]
+     = T2[X] = T2[Y] = T2[Z]
      = TP[X] = TP[Y] = TP[Z] = 0;
 
   for (i = 0; i < p->numFaces; i++) {
@@ -457,7 +472,7 @@ char fn[] = { "cube.txt" };
   double density, mass;
   double r[3];            /* center of mass */
   double J[3][3];         /* inertia tensor */
-  
+
   double CubicCoeffs[4];  /* cubic coefficients */
 
   readPolyhedron( (argc==1) ? FN : (strcmp("-",argv[1]) ? argv[1] : 0), &p);
@@ -470,7 +485,7 @@ char fn[] = { "cube.txt" };
   printf("Tx =   %+20.6f\n", T1[X]);
   printf("Ty =   %+20.6f\n", T1[Y]);
   printf("Tz =   %+20.6f\n\n", T1[Z]);
-  
+
   printf("Txx =  %+20.6f\n", T2[X]);
   printf("Tyy =  %+20.6f\n", T2[Y]);
   printf("Tzz =  %+20.6f\n\n", T2[Z]);
@@ -500,9 +515,9 @@ char fn[] = { "cube.txt" };
   J[X][X] -= mass * (r[Y]*r[Y] + r[Z]*r[Z]);
   J[Y][Y] -= mass * (r[Z]*r[Z] + r[X]*r[X]);
   J[Z][Z] -= mass * (r[X]*r[X] + r[Y]*r[Y]);
-  J[X][Y] = J[Y][X] += mass * r[X] * r[Y]; 
-  J[Y][Z] = J[Z][Y] += mass * r[Y] * r[Z]; 
-  J[Z][X] = J[X][Z] += mass * r[Z] * r[X]; 
+  J[X][Y] = J[Y][X] += mass * r[X] * r[Y];
+  J[Y][Z] = J[Z][Y] += mass * r[Y] * r[Z];
+  J[Z][X] = J[X][Z] += mass * r[Z] * r[X];
 
   printf("center of mass:  (%+12.6f,%+12.6f,%+12.6f)\n", r[X], r[Y], r[Z]);
 
@@ -520,7 +535,7 @@ char fn[] = { "cube.txt" };
     else { wlon = atan2( -y, x) * dpr; }
     if ( wlon < 0.0) wlon += 360.0;
     lat = (z<-1.0) ? -999.0 : (z>1.0) ? 999.0 : (asin(z)*dpr);
-    
+
     printf("  - lat,wlon,r:  (%+12.6f,%+12.6f,%+12.6f)\n\n", lat, wlon, radius);
   }
 
@@ -539,10 +554,10 @@ char fn[] = { "cube.txt" };
 # define Iyx Ixy
 # define Izy Iyz
 # define Ixz Izx
-  
+
   CC3 = -1.0;
   CC2 = Ixx + Iyy + Izz;
-  CC1 = SQR(Ixy) + SQR(Iyz) + SQR(Izx) 
+  CC1 = SQR(Ixy) + SQR(Iyz) + SQR(Izx)
         - (Ixx*Iyy + Iyy*Izz + Izz*Ixx);
   CC0 = (2.0*Ixy*Iyz*Izx) + (Ixx*Iyy*Izz)
         - (Izz*SQR(Ixy) + Ixx*SQR(Iyz) + Iyy*SQR(Izx));
@@ -629,7 +644,7 @@ char fn[] = { "cube.txt" };
   printf("Eigenvectors (in columns):\n");
   for ( iEig=0; iEig<3; ++iEig)
   {
-    printf("%+15.12f %+15.12f %+15.12f\n" 
+    printf("%+15.12f %+15.12f %+15.12f\n"
           , eigVecs[X][iEig], eigVecs[Y][iEig], eigVecs[Z][iEig]);
   }
   printf("\n");
